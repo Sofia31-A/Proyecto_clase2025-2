@@ -35,16 +35,22 @@ class SaleController extends Controller
 
     public function edit(string $id)
     {
-        
+        $sale = Sale::find($id);
+        return view('edit_sales')->with('sale', $sale);
     }
 
     public function update(Request $request, string $id)
     {
-    
+        $sale = Sale::find($id);
+        $sale->name = $request->test;
+        $sale->save();
+        return redirect()->route('sales.index');
     }
 
     public function destroy(string $id)
     {
-    
+        $sale = Sale::find($id);
+        $sale->delete();
+        return redirect()->route('sales.index');
     }
 }

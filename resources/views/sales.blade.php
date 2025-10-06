@@ -10,16 +10,20 @@
         <thead>
             <th>ID</th>
             <th>NOMBRE</th>
-            <th>CREATE AT</th>
-            <th>UPDATE AT</th>
         </thead>
         <tbody>
             @foreach($sales as $sale)
             <tr>
                 <td>{{$sale->id}}</td>
                 <td>{{$sale->name}}</td>
-                <td>{{$sale->created_at}}</td>
-                <td>{{$sale->updated_at}}</td>
+                <td>
+                    <a href="{{route('sales.edit', $sale->id)}}">Editar</a>
+                    <form action="{{route('sales.destroy', $sale->id)}}" method="post">
+                    @method('DELETE')
+                    @csrf 
+                    <button type="submit">Eliminar</button>
+                </form>
+                </td>
             </tr>
             @endforeach
         </tbody>
